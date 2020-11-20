@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <string>
 
 // Function Prototypes
 int * * GenerateMatrix(int);
@@ -13,9 +14,26 @@ void InitializeMatrix(int * *, int);
 void CalculateDistinctPartitions(int * *, int);
 
 int main(int argc, const char * argv[]) {
+    // The user may specify n through command line arguments
+    int n;
+    if (argc > 1)
+    {
+        // This argument will need to be cast as an integer
+        try
+        {
+            n = std::stoi(argv[1]);
+        }
+        catch (std::invalid_argument)
+        {
+            std::cout << "Invalid input, using default argument 200." << std::endl;
+            n = 200;
+        }
+    }
+    else
+    {
+        n = 200;
+    }
     // This problem is essentially Euler's distinct partition problem, which can be solved using a matrix.
-    int n = 200;
-    // Generate the matrix
     int * * m = GenerateMatrix(n);
     // Initialize the matrix cells
     InitializeMatrix(m, n);
